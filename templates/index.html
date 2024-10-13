@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="\static\styles.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        {% block title %}
+        <title>Главная</title>
+        {% endblock %}
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Каталог
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000">Главная</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/pens">Шариковые ручки</a></li>
+                            <li><a class="dropdown-item" href="http://127.0.0.1:8000/color-pencils">Цветные карандаши</a></li>
+                          </ul>
+                        </li>
+                        <li><a class="nav-link" href="http://127.0.0.1:8000/about">О компании</a></li>
+                      </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="content">
+                {% block content %}
+                {% if info_products %}
+                    <!-- Если есть записи, выводим их список -->
+                    <h2>Список товаров</h2>
+                    <ul>
+                        <!-- Цикл по всем записям -->
+                        {% for product in info_products %}
+                        <li>
+                            <a class="link-offset-2 link-underline link-underline-opacity-0" id="color_link" href="http://127.0.0.1:8000/product/{{ product.id }}" >
+                                Название: {{ product.name }}; Цена: {{ product.price }} р.
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% elif info_product %}
+                    <h2>Информация о товаре</h2>
+                    <ul>
+                        <li>Название: {{ info_product.name }}; Цена: {{ info_product.price }} р.</li>
+                    </ul>
+                {% endif %}
+                {% endblock %}
+            </div>
+            <div class="footer">
+                <footer class="bg-body-tertiary text-center text-lg-start">
+                    <div class="text-center p-3" style="background-color: #000000;color: #A9A9A9">
+                        © 2024 Copyright: @den_a_s_t
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </body>
+</html>

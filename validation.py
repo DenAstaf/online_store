@@ -1,0 +1,13 @@
+from pydantic import BaseModel
+from typing import Annotated
+from fastapi import Query
+
+
+class IdValidation(BaseModel):
+    id: Annotated[int, Query(gt=0)] = ...
+
+
+class DataValidation(IdValidation):
+    type_catalog: Annotated[str, Query(min_length=3)] = ...
+    name: Annotated[str, Query(min_length=1)] = ...
+    price: Annotated[int, Query(gt=0)] = ...
